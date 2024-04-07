@@ -13,4 +13,4 @@ GDSC SSWU 5기 코딩테스트 스터디 레파지토리입니다.
 ## 🌏 Study Member
 |  | 장유정 | 이유진 | 이가인 | 최애림 |
 | :-------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: |
-|깃허브|[@JangYouJung](https://github.com/JangYouJung)| [@Leeyoujin00](https://github.com/Leeyoujin00) |  [@LGAIN](https://github.com/LGAIN)  |  [@aerim-choi](https://github.com/aerim-choi)  |
+| Github|[@JangYouJung](https://github.com/JangYouJung)| [@Leeyoujin00](https://github.com/Leeyoujin00) |  [@LGAIN](https://github.com/LGAIN)  |  [@aerim-choi](https://github.com/aerim-choi)  |
