@@ -1,0 +1,112 @@
+
+class Solution {
+
+    public String solution(String p) {
+        return makeCorrectBracket(p);
+    }
+
+
+    /*
+    // 주어진 문자열을 올바른 괄호 문자열로 변환하는 재귀함수
+    // @param s: [String] 주어진 문자열 s
+    // @return [String] 주어진 문자열 s를 올바른 괄호 문자열로 변환한 결과
+    */
+    public String makeCorrectBracket( String s ){
+
+		// 1. 입력이 빈 문자열인 경우, 빈 문자열을 반환
+        if( s.isEmpty() ) return s;
+
+		// 2. 문자열 s를 두 "균형잡인 괄호 문자열" u,v로 분리
+        String[] strings = splitString(s);
+        String u = strings[0];
+        String v = strings[1];
+
+        StringBuilder correctString = new StringBuilder();
+
+		// 3. 문자열 u가 올바른 괄호 문자열인 경우
+        if(checkIfCorrect(u)){
+        
+            correctString.append(u);
+            
+            // 3-1. v를 1단계부터 다시 수행하고, 그 결과를 u에 이어 붙인다.
+            correctString.append(makeCorrectBracket(v));
+            
+        }
+        else{ // 4. 문자열 u가 올바른 괄호 문자열이 아닌 경우
+            
+            // 4-1. 괄호 열기
+            correctString.append('(');
+
+            // 4-2. v를 1단계부터 재귀 수행 후 이어 붙이기
+            correctString.append(makeCorrectBracket(v));
+
+            // 4-3. 괄호 닫기
+            correctString.append(')');
+
+            // 4-4. u 맨 앞뒤 지우고, 괄호 뒤집어서 붙이기
+            for( int i = 1; i < u.length()-1; i++ ){
+                if( u.charAt(i) == ')') correctString.append('(');
+                else correctString.append(')');
+            }
+        }
+		
+        // 3-2, 4-5. 생성된 문자열 반환
+        return correctString.toString();
+
+    }
+
+    /*
+    // 주어진 문자열이 올바른 괄호 문자열인지 확인
+    // @param s: 주어진 문자열 s
+    // @return [boolean]: 올바른 괄호 문자열이면 true
+     */
+    public boolean checkIfCorrect( String s ){
+        int open = 0;
+
+        for( int i = 0; i < s.length(); i++ ){
+            char bracket = s.charAt(i);
+            if( bracket == ')'){
+                if( open == 0 ) return false;
+                else open--;
+            }
+
+            else open++;
+        }
+
+        return true;
+    }
+
+
+    /*
+    // 주어진 문자열을 두 개의 균형잡인 괄호 문자열로 분리하는 함수
+    // @param s: [String] 주어진 문자열 s
+    // @return [String[]] 주어진 문자열 s를 균형잡인 두 개의 괄호 문자열로 나눈 결과
+     */
+    public String[] splitString( String s ){
+
+        String[] strings = new String[2];
+
+        int open = 0; // 여는 괄호 개수
+        int close = 0; // 닫는 괄호 개수
+        int split = 0; // 문자열 두 개로 나누는 지점
+
+        for( int i = 0; i < s.length(); i++ ){
+            char bracket = s.charAt(i);
+
+            if( bracket == '(') open++;
+            else close++;
+
+            if( open == close ) {
+                split = i + 1;
+                break;
+            }
+        }
+
+        strings[0] = s.substring(0,split);
+        strings[1] = s.substring(split);
+
+        return strings;
+
+    }
+
+}
