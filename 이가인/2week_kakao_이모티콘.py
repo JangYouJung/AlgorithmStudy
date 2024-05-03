@@ -13,6 +13,7 @@ def solution(users, emoticons):
             tmp[depth] -= d
 
     dfs([0] * len(emoticons), 0)
+    print(discount)
 
     for d in range(len(discount)):
         plus_user = 0
