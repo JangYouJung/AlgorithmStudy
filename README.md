@@ -15,3 +15,5 @@ GDSC SSWU 5기 코딩테스트 스터디 레파지토리입니다.
 | :-------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: | :-------------------------------: |
 | Github|[@JangYouJung](https://github.com/JangYouJung)| [@Leeyoujin00](https://github.com/Leeyoujin00) |  [@LGAIN](https://github.com/LGAIN)  |  [@aerim-choi](https://github.com/aerim-choi)  |
 | Language | <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"> | <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"> | <img src="https://img.shields.io/badge/Python-3766AB?style=for-the-badge&logo=Python&logoColor=white">  |  <img src="https://img.shields.io/badge/Python-3766AB?style=for-the-badge&logo=Python&logoColor=white"> |
+
+### [🔗스터디 일지](https://cypress-overcoat-478.notion.site/CodingTest-Study-ca7e1509acd64b8686fe196b6721bcb0?pvs=4)
