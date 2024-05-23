@@ -1,0 +1,45 @@
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+    static int START;
+    static int END;
+    static int[] times = new int[100001];
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer line = new StringTokenizer(bf.readLine(), " ");
+
+        START = Integer.parseInt(line.nextToken());
+        END = Integer.parseInt(line.nextToken());
+
+        if( START >= END ){
+            System.out.println( START - END );
+            return;
+        }
+
+        for( int i = 0; i <= START; i++ ){
+            times[i] = START - i;
+        }
+
+        dp();
+        
+        System.out.println(times[END]);
+
+    }
+
+    static void dp( ){
+        for( int i = START + 1; i < END + 1; i++ ){
+            int min;
+            if( i % 2 == 0 ){
+                min = times[i/2] + 1;
+            }
+            else{
+                min = Math.min( times[i-1] + 1, times[(i+1)/2]+2 );
+            }
+            times[i] = Math.min(min, times[i-1] + 1 );
+        }
+    }
+}

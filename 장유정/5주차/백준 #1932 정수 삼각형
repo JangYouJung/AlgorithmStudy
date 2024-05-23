@@ -1,0 +1,68 @@
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+    static int N;
+    static int[] tree;
+    static int[] SumTree;
+    static int MAX;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(bf.readLine());
+        tree = new int[ N*(N+1)/2 + 1 ];
+        SumTree = new int[ N*(N+1)/2 + 1 ];
+
+        for( int i = 1; i < N*(N+1)/2 + 1; ){
+            StringTokenizer line = new StringTokenizer(bf.readLine(), " ");
+            while(line.hasMoreTokens()){
+                tree[i] = Integer.parseInt(line.nextToken());
+                i++;
+            }
+        }
+
+        dp();
+
+        System.out.println(SumTree[1]);
+
+    }// end of main
+
+    
+    public static void dfs( int index, int jump, int sum ){
+        if( index > tree.length - 1 ){ // 리프 노드 도달
+            MAX = Math.max(MAX, sum);
+            return;
+        }
+
+        SumTree[index] = tree[index] + Math.max( SumTree[index + jump], SumTree[index + jump + 1]  );
+        sum += tree[index];
+        dfs( index + jump, jump + 1, sum );
+        dfs( index + jump + 1, jump + 1, sum);
+    }
+
+    public static void dp( ){
+
+        // 리프노드 채우기
+        int cnt = N;
+        for( int i = tree.length - 1 ; ; i-- ){
+            if( cnt == 0 ) break;
+            SumTree[i] = tree[i];
+            cnt--;
+        }
+
+        int node = N - 1;
+        int current = node;
+
+        for( int i = tree.length - 1 - N ; i > 0 ; i-- ){
+            if( current == 0 ) {
+                node --;
+                current = node;
+            }
+            SumTree[i] = tree[i] + Math.max( SumTree[ i + node ], SumTree[ i + node + 1 ] );
+            current--;
+        }
+    }
+
+}// end of class

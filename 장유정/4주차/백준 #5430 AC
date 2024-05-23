@@ -1,0 +1,77 @@
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    static int T;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        T = Integer.parseInt(bf.readLine());
+
+        for( int i = 0; i<T; i++ ){
+            String s = bf.readLine();
+            int N = Integer.parseInt(bf.readLine());
+            String input = bf.readLine();
+
+            Deque<Integer> deque = new LinkedList<>();
+
+            if( N == 0 ){
+                if(s.contains("D")) System.out.println("error");
+                else System.out.println("[]");
+                continue;
+            }
+
+            for( int j = 1; j < input.length(); j++ ){
+                StringBuilder number = new StringBuilder();
+
+                while (input.charAt(j) != ',' && input.charAt(j) != ']') {
+                    number.append(input.charAt(j));
+                    j++;
+                }
+
+                deque.offer(Integer.parseInt(number.toString()));
+            }
+
+            boolean error = false;
+            boolean reverse = false;
+
+            for( int j = 0; j<s.length(); j++ ){
+                if( s.charAt(j)=='R'){ // 뒤집기
+                    reverse = !reverse;
+                }
+                else{
+                    if(deque.isEmpty()) error = true;
+                    if(!reverse) deque.pollFirst();
+                    else deque.pollLast();
+                }
+            }
+
+            if(error) System.out.println("error");
+            else{
+                System.out.print("[");
+
+                StringBuilder result = new StringBuilder();
+                if(!reverse){
+                    while(!deque.isEmpty()){
+                        result.append(deque.pollFirst()).append(",");
+                    }
+                }
+                else {
+                    while(!deque.isEmpty()){
+                        result.append(deque.pollLast()).append(",");
+                    }
+                }
+
+                if(result.length()>0) result.deleteCharAt(result.length()-1);
+                System.out.print(result);
+                System.out.println("]");
+            }
+
+        }
+
+    }// end of main
+
+}// end of class
