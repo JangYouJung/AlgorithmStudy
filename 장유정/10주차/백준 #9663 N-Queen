@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    static int[] board;
+    static int N;
+    static int answer = 0;
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(bf.readLine());
+
+        board = new int[N];
+
+        placeTheQueen(0);
+
+        System.out.println(answer);
+    }
+
+    public static void placeTheQueen( int col){
+        if( col == N ) {
+            answer ++;
+            return;
+        }
+
+        for( int row = 0; row < N; row++ ){
+            if(checkTheQueen( col, row )){
+                board[col] = row;
+                placeTheQueen(col + 1 );
+            }
+        }
+    }
+
+    public static boolean checkTheQueen(int col, int row){
+        for( int i = 0; i < col; i++ ){
+            if( board[i] == row || ( Math.abs( board[i] - row ) == Math.abs( i - col) )){
+                return false;
+            }
+        }
+        return true;
+    }
+
+}
